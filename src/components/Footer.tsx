@@ -69,9 +69,14 @@ export const Footer: React.FC = () => {
         <div className="mt-8 pt-6 border-t border-stone-800/80 flex items-center justify-end text-[11px] text-stone-500">
           <div className="flex items-center gap-1.5 text-stone-400">
             <span className="text-stone-500 text-[11px]">Designed & Engineered by</span>
-            <span className="font-medium text-stone-300 hover:text-white transition-colors tracking-wide">
+            <a
+              href="https://tapandgo-cards.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-stone-300 hover:text-white hover:underline transition-colors tracking-wide underline-offset-2"
+            >
               Kyle Nero A. Santos
-            </span>
+            </a>
           </div>
         </div>
 
