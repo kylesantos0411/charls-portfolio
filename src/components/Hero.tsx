@@ -70,8 +70,8 @@ export const Hero: React.FC = () => {
 
   const keyFacts = [
     { 
-      title: 'Academic Standing', 
-      desc: 'Magna Cum Laude',
+      title: 'Academic Degree', 
+      desc: 'BS in Entrepreneurship',
       icon: Award,
       color: 'text-[#B94C29] dark:text-[#E0734F] bg-[#FDF2EB] dark:bg-[#301B14] border-[#F5D3C1] dark:border-[#5C2D1F]'
     },
@@ -264,10 +264,10 @@ export const Hero: React.FC = () => {
                   className="w-full h-full object-cover object-top contrast-[1.02] group-hover:scale-102 transition-transform duration-700"
                 />
                 
-                {/* Terracotta distinction badge on portrait */}
+                {/* Distinction badge on portrait */}
                 <div className="absolute bottom-3 left-3 bg-[#FDF2EB]/95 dark:bg-[#301B14]/95 backdrop-blur-xs border border-[#F5D3C1] dark:border-[#5C2D1F] text-[#B94C29] dark:text-[#E0734F] px-2.5 py-1 text-[11px] font-semibold flex items-center gap-1.5 shadow-xs">
                   <Award className="w-3.5 h-3.5" />
-                  <span>Magna Cum Laude • BS Entrepreneurship</span>
+                  <span>BS Entrepreneurship • Marikina Polytechnic College</span>
                 </div>
               </div>
 

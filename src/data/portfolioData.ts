@@ -178,9 +178,9 @@ export const portfolioData: PortfolioData = {
     lastName: "Andrada",
     monogram: "CA",
     professionalTitle: "Entrepreneur | Business Development & Digital Marketing Specialist",
-    academicDistinction: "Magna Cum Laude • BS Entrepreneurship",
+    academicDistinction: "BS Entrepreneurship • Class of 2026",
     heroHeadline: "Building Ideas Into Brands. Turning Strategy Into Growth.",
-    heroSubheadline: "Entrepreneur and business development specialist with hands-on experience in brand building, digital marketing, e-commerce, and day-to-day operations. Magna Cum Laude graduate of Marikina Polytechnic College.",
+    heroSubheadline: "Entrepreneur and business development specialist with hands-on experience in brand building, digital marketing, e-commerce, and day-to-day operations. Graduate of Marikina Polytechnic College with a degree in Entrepreneurship.",
     portraitImage: "/charls_portrait.jpg",
     aboutImage: "/charls_portrait.jpg",
     resumePdfPath: "/resume.pdf",
@@ -221,13 +221,13 @@ export const portfolioData: PortfolioData = {
   about: {
     headline: "Turning ideas into workable, revenue-generating opportunities.",
     bioParagraphs: [
-      "I am an entrepreneur and business development specialist with a background in Entrepreneurship and hands-on experience in brand management, digital marketing, e-commerce, and business operations. As a Magna Cum Laude graduate of Marikina Polytechnic College, I combine academic rigor with practical experience in launching and managing commercial ventures.",
+      "I am an entrepreneur and business development specialist with a background in Entrepreneurship and hands-on experience in brand management, digital marketing, e-commerce, and business operations. As a graduate of Marikina Polytechnic College with a degree in Entrepreneurship, I combine academic training with practical experience in launching and managing commercial ventures.",
       "My entrepreneurial journey includes building LOSTDAWG, a streetwear retail brand; AIGHT CAFE, a modern coffee and matcha beverage business; and JUNKYARD PH, a matcha-focused beverage venture. My responsibilities span concept development, market research, product innovation, website management, content creation, and business planning.",
       "Alongside my own ventures, I developed strong operational discipline as an Assistant Supervisor at Zugusho Aircon & Refrigeration Services, managing service scheduling, field team coordination, customer inquiries, and job quality standards."
     ],
     degree: "Bachelor of Science in Entrepreneurship",
     institution: "Marikina Polytechnic College",
-    graduationHonor: "Magna Cum Laude (Class of 2026)",
+    graduationHonor: "Class of 2026",
     corePrinciples: [
       {
         title: "Strategy With Execution",
@@ -278,11 +278,11 @@ export const portfolioData: PortfolioData = {
       {
         id: "mile-2026",
         year: "2026",
-        title: "Graduated Magna Cum Laude & TESDA Certification",
+        title: "BS Entrepreneurship Graduation & Certification",
         organization: "Marikina Polytechnic College",
-        badge: "Magna Cum Laude",
+        badge: "Class of 2026",
         badgeType: "terracotta",
-        description: "Graduated with highest Latin distinction (Magna Cum Laude) in BS Entrepreneurship. Completed TESDA iSTAR Online certification and actively scaling commercial ventures."
+        description: "Graduated with Magna Cum Laude Latin honors in BS Entrepreneurship. Completed 6 TESDA iSTAR Online certifications while actively scaling commercial ventures."
       }
     ]
   },
@@ -501,11 +501,11 @@ export const portfolioData: PortfolioData = {
       },
       {
         id: "cred-02",
-        title: "Magna Cum Laude Latin Honor",
+        title: "Academic Excellence Distinction",
         institution: "Marikina Polytechnic College",
         year: "2026",
-        distinction: "High Academic Distinction",
-        description: "Conferred for outstanding academic excellence, maintaining top grade standing across all academic years while actively building commercial enterprises.",
+        distinction: "High Academic Standing",
+        description: "Conferred for outstanding academic performance, maintaining top standing across all academic years while actively building commercial enterprises.",
         type: "Honor"
       },
       {
