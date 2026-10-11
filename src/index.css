@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Newsreader', Garamond, Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    /* Earthy, non-AI prestige colors */
+    --spruce-dark: #12382D;
+    --spruce: #174A3B;
+    --spruce-light: #236551;
+    --spruce-tint: #EAF3EE;
+    --spruce-border: #BCD4C6;
+    
+    --terracotta: #B94C29;
+    --terracotta-dark: #96381A;
+    --terracotta-tint: #FDF2EB;
+    --terracotta-border: #F5D3C1;
+    
+    --paper-bg: #FAF8F5;
+    --paper-subtle: #F3EFE7;
+    --paper-surface: #FFFFFF;
+    --ink: #1A1816;
+    --ink-muted: #57534E;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--paper-bg);
+    color: var(--ink);
+    overflow-x: hidden;
+    letter-spacing: -0.01em;
+  }
+
+  h1, h2, h3, .font-serif-editorial {
+    font-family: var(--font-serif);
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Tasteful non-neon color utilities */
+.bg-spruce {
+  background-color: #174A3B;
+}
+
+.bg-spruce-dark {
+  background-color: #12382D;
+}
+
+.text-spruce {
+  color: #174A3B;
+}
+
+.bg-spruce-tint {
+  background-color: #EAF3EE;
+}
+
+.border-spruce-subtle {
+  border-color: #BCD4C6;
+}
+
+.bg-terracotta {
+  background-color: #B94C29;
+}
+
+.text-terracotta {
+  color: #B94C29;
+}
+
+.bg-terracotta-tint {
+  background-color: #FDF2EB;
+}
+
+.border-terracotta-subtle {
+  border-color: #F5D3C1;
+}
+
+.paper-bg {
+  background-color: #FAF8F5;
+}
+
+.paper-surface {
+  background-color: #FFFFFF;
+}
+
+.paper-subtle {
+  background-color: #F3EFE7;
+}
+
+/* Refined typography styling */
+.editorial-title {
+  font-family: var(--font-serif);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
