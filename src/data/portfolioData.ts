@@ -15,6 +15,12 @@ export interface CaseStudy {
   outcomes: string[];
 }
 
+export interface BusinessLink {
+  label: string;
+  url: string;
+  type: 'website' | 'instagram';
+}
+
 export interface BusinessItem {
   id: string;
   name: string;
@@ -26,6 +32,10 @@ export interface BusinessItem {
   image: string;
   logo?: string;
   link?: string;
+  websiteUrl?: string;
+  socialUrl?: string;
+  socialHandle?: string;
+  links?: BusinessLink[];
   featured: boolean;
   keyInitiative?: {
     title: string;
@@ -291,7 +301,15 @@ export const portfolioData: PortfolioData = {
         year: "2024 — Present",
         image: "https://images.unsplash.com/photo-1523381294911-8d3cead13475?q=80&w=1200&auto=format&fit=crop",
         logo: "/logos/lostdawg.jpg",
-        link: "https://instagram.com/lost_dawgz",
+        websiteUrl: "https://sites.google.com/view/lostdawg/home?fbclid=padGRleAU4a_DPGHRuCeHPDRya15pprNqenC_ej-vTz66Oa3v6BrXH3eyvmXqSmLjNy79rC2Kdpu_yd2KzuiLOHA_aem_d7a--wc4-m5zhovczu2rdg",
+        link: "https://sites.google.com/view/lostdawg/home?fbclid=padGRleAU4a_DPGHRuCeHPDRya15pprNqenC_ej-vTz66Oa3v6BrXH3eyvmXqSmLjNy79rC2Kdpu_yd2KzuiLOHA_aem_d7a--wc4-m5zhovczu2rdg",
+        links: [
+          {
+            label: "Visit Storefront",
+            url: "https://sites.google.com/view/lostdawg/home?fbclid=padGRleAU4a_DPGHRuCeHPDRya15pprNqenC_ej-vTz66Oa3v6BrXH3eyvmXqSmLjNy79rC2Kdpu_yd2KzuiLOHA_aem_d7a--wc4-m5zhovczu2rdg",
+            type: "website"
+          }
+        ],
         featured: true,
         keyInitiative: {
           title: "Storefront Architecture & Dropshipping Pipeline",
@@ -321,7 +339,16 @@ export const portfolioData: PortfolioData = {
         year: "2025 — Present",
         image: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?q=80&w=1200&auto=format&fit=crop",
         logo: "/logos/aightcafe.jpg",
-        link: "#",
+        socialUrl: "https://www.instagram.com/aightcafeofficial",
+        socialHandle: "@aightcafeofficial",
+        link: "https://www.instagram.com/aightcafeofficial",
+        links: [
+          {
+            label: "Instagram @aightcafeofficial",
+            url: "https://www.instagram.com/aightcafeofficial",
+            type: "instagram"
+          }
+        ],
         featured: true,
         keyInitiative: {
           title: "Can Packaging Concept & Recipe Formulation",
@@ -351,7 +378,16 @@ export const portfolioData: PortfolioData = {
         year: "2025 — Present",
         image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=1200&auto=format&fit=crop",
         logo: "/logos/junkyard.jpg",
-        link: "https://instagram.com/junkyardph",
+        socialUrl: "https://www.instagram.com/junkyardph",
+        socialHandle: "@junkyardph",
+        link: "https://www.instagram.com/junkyardph",
+        links: [
+          {
+            label: "Instagram @junkyardph",
+            url: "https://www.instagram.com/junkyardph",
+            type: "instagram"
+          }
+        ],
         featured: true,
         keyInitiative: {
           title: "Mobile Pop-Up Booth Operations & Community Bar",

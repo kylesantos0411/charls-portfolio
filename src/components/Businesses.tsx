@@ -4,6 +4,8 @@ import {
   Building2, 
   Calendar, 
   CheckCircle2, 
+  ExternalLink,
+  Globe,
   Megaphone, 
   ShoppingBag, 
   UserCheck, 
@@ -11,6 +13,15 @@ import {
 } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 import type { BusinessItem } from '../data/portfolioData';
+
+// Clean, accurate Instagram SVG icon
+const InstagramIcon: React.FC<{ className?: string }> = ({ className = "w-3.5 h-3.5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
 
 interface BusinessesProps {
   onSelectBusiness: (item: BusinessItem) => void;
@@ -83,6 +94,8 @@ export const Businesses: React.FC<BusinessesProps> = ({ onSelectBusiness }) => {
             const CategoryIcon = getCategoryIcon(item.category);
             const highlight = getVentureHighlight(item.id);
             const editorialNumber = `0${idx + 1}`;
+            const primaryLink = item.websiteUrl || item.socialUrl || item.link;
+            const isStorefront = item.id === 'venture-lostdawg';
 
             return (
               <article
@@ -153,6 +166,32 @@ export const Businesses: React.FC<BusinessesProps> = ({ onSelectBusiness }) => {
                     <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed font-normal">
                       {item.shortDescription}
                     </p>
+
+                    {/* Direct Social / Website Account Action Button */}
+                    {primaryLink && (
+                      <div className="pt-2">
+                        <a
+                          href={primaryLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#FAF8F5] dark:bg-[#1F1E1B] border border-stone-200/90 dark:border-stone-700 hover:border-[#174A3B] dark:hover:border-[#3D9E82] text-xs font-semibold text-stone-800 dark:text-stone-200 hover:text-[#174A3B] dark:hover:text-[#3D9E82] hover:bg-[#EAF3EE] dark:hover:bg-[#132D24] transition-all shadow-2xs rounded-xs group/link"
+                        >
+                          {isStorefront ? (
+                            <>
+                              <Globe className="w-3.5 h-3.5 text-[#174A3B] dark:text-[#3D9E82]" />
+                              <span>Visit Official Storefront</span>
+                            </>
+                          ) : (
+                            <>
+                              <InstagramIcon className="w-3.5 h-3.5 text-[#E0734F] dark:text-[#E0734F]" />
+                              <span>{item.socialHandle ? item.socialHandle : 'Instagram Account'}</span>
+                            </>
+                          )}
+                          <ExternalLink className="w-3 h-3 text-stone-400 group-hover/link:text-[#174A3B] dark:group-hover/link:text-[#3D9E82] transition-colors ml-0.5" />
+                        </a>
+                      </div>
+                    )}
 
                     {/* Integrated Key Initiative & Applied Methods */}
                     {item.keyInitiative && (

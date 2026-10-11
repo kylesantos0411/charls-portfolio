@@ -3,11 +3,22 @@ import {
   AlertCircle, 
   BookOpen, 
   CheckCircle2, 
+  ExternalLink,
+  Globe,
   Lightbulb, 
   UserCheck, 
   X 
 } from 'lucide-react';
 import type { BusinessItem, ProjectItem } from '../data/portfolioData';
+
+// Clean Instagram SVG icon
+const InstagramIcon: React.FC<{ className?: string }> = ({ className = "w-3.5 h-3.5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
 
 interface CaseStudyModalProps {
   item: BusinessItem | ProjectItem | null;
@@ -33,6 +44,8 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ item, onClose })
 
   const isBusiness = 'tagline' in item;
   const caseStudy = item.caseStudy;
+  const liveUrl = ('websiteUrl' in item && item.websiteUrl) || ('socialUrl' in item && item.socialUrl) || item.link;
+  const isStorefront = item.id === 'venture-lostdawg' || item.category?.includes('Streetwear');
 
   return (
     <div
@@ -79,6 +92,31 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ item, onClose })
                 <p className="font-serif italic text-base text-stone-600 dark:text-stone-400">
                   "{item.tagline}"
                 </p>
+              )}
+
+              {/* Direct Link Button */}
+              {liveUrl && liveUrl !== '#' && (
+                <div className="pt-2">
+                  <a
+                    href={liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#FAF8F5] dark:bg-[#1F1E1B] border border-stone-200 dark:border-stone-700 text-[#174A3B] dark:text-[#3D9E82] hover:border-[#174A3B] dark:hover:border-[#3D9E82] hover:bg-[#EAF3EE] dark:hover:bg-[#132D24] text-xs font-semibold uppercase tracking-wider rounded-xs transition-all shadow-2xs"
+                  >
+                    {isStorefront ? (
+                      <>
+                        <Globe className="w-3.5 h-3.5" />
+                        <span>Visit Official Storefront</span>
+                      </>
+                    ) : (
+                      <>
+                        <InstagramIcon className="w-3.5 h-3.5 text-[#E0734F]" />
+                        <span>View Instagram Profile</span>
+                      </>
+                    )}
+                    <ExternalLink className="w-3 h-3 ml-0.5" />
+                  </a>
+                </div>
               )}
             </div>
 
@@ -209,8 +247,30 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ item, onClose })
             </div>
           )}
 
-          {/* Close Action */}
-          <div className="pt-6 border-t border-stone-200 dark:border-stone-800 flex justify-end">
+          {/* Modal Footer Actions */}
+          <div className="pt-6 border-t border-stone-200 dark:border-stone-800 flex flex-wrap items-center justify-between gap-3">
+            {liveUrl && liveUrl !== '#' ? (
+              <a
+                href={liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 border border-[#BCD4C6] dark:border-[#245544] bg-[#EAF3EE] dark:bg-[#132D24] text-[#174A3B] dark:text-[#3D9E82] text-xs font-semibold uppercase tracking-wider hover:bg-[#174A3B] dark:hover:bg-[#2D7A64] hover:text-white transition-all shadow-2xs"
+              >
+                {isStorefront ? (
+                  <>
+                    <Globe className="w-3.5 h-3.5" />
+                    <span>Open Storefront Website</span>
+                  </>
+                ) : (
+                  <>
+                    <InstagramIcon className="w-3.5 h-3.5" />
+                    <span>Open Instagram Profile</span>
+                  </>
+                )}
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            ) : <div />}
+
             <button
               onClick={onClose}
               className="px-6 py-2.5 bg-[#174A3B] dark:bg-[#1D5344] text-white text-xs uppercase tracking-widest font-semibold hover:bg-[#12382D] dark:hover:bg-[#164236] transition-colors cursor-pointer"
