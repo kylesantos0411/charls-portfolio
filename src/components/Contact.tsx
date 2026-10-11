@@ -117,9 +117,9 @@ ${senderName}`;
     setSubmitStatus('idle');
 
     // Web3Forms direct transmission
-    const accessKey = import.meta.env.VITE_WEB3FORMS_KEY || 'YOUR_ACCESS_KEY_HERE';
+    const accessKey = import.meta.env.VITE_WEB3FORMS_KEY || 'a0e39fde-4f9e-40fe-a17f-a92e8bf4e175';
 
-    if (accessKey && accessKey !== 'YOUR_ACCESS_KEY_HERE') {
+    if (accessKey) {
       try {
         const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
