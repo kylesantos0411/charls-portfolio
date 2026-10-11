@@ -27,11 +27,11 @@ export const About: React.FC = () => {
           <span className="text-stone-400 dark:text-stone-500 font-mono text-[11px]">FOUNDER PROFILE</span>
         </div>
 
-        {/* 3-Column Editorial Grid */}
-        <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        {/* 2-Column Editorial Grid: Story & Vision + Academic Honors & Principles */}
+        <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           
           {/* Column 1: Story & Vision */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-6 space-y-6">
             <h2 className="font-serif text-3xl sm:text-4xl font-normal text-stone-950 dark:text-stone-50 leading-snug">
               {about.headline}
             </h2>
@@ -54,7 +54,7 @@ export const About: React.FC = () => {
           </div>
 
           {/* Column 2: Academic Honors & Principles */}
-          <div className="lg:col-span-4 bg-white dark:bg-[#181714] p-7 border border-stone-200/90 dark:border-stone-800 shadow-xs space-y-7">
+          <div className="lg:col-span-6 bg-white dark:bg-[#181714] p-7 sm:p-9 border border-stone-200/90 dark:border-stone-800 shadow-xs space-y-7">
             
             {/* Degree Card with Terracotta Honor Tag */}
             <div className="space-y-3 pb-6 border-b border-stone-200/70 dark:border-stone-800">
@@ -62,21 +62,21 @@ export const About: React.FC = () => {
                 <span className="text-[11px] font-semibold tracking-wider text-stone-500 dark:text-stone-400 uppercase">
                   Academic Degree
                 </span>
-                <span className="inline-flex items-center gap-1 text-[11px] font-semibold uppercase px-2 py-0.5 bg-[#FDF2EB] dark:bg-[#301B14] text-[#B94C29] dark:text-[#E0734F] border border-[#F5D3C1] dark:border-[#5C2D1F]">
+                <span className="inline-flex items-center gap-1 text-[11px] font-semibold uppercase px-2.5 py-1 bg-[#FDF2EB] dark:bg-[#301B14] text-[#B94C29] dark:text-[#E0734F] border border-[#F5D3C1] dark:border-[#5C2D1F]">
                   <Award className="w-3 h-3" />
                   <span>{about.graduationHonor}</span>
                 </span>
               </div>
 
-              <div className="flex items-start gap-3 pt-1">
-                <div className="p-2 rounded-sm bg-[#EAF3EE] dark:bg-[#132D24] text-[#174A3B] dark:text-[#3D9E82] border border-[#BCD4C6] dark:border-[#245544] shrink-0 mt-0.5">
-                  <GraduationCap className="w-4 h-4" />
+              <div className="flex items-start gap-3.5 pt-1">
+                <div className="p-2.5 rounded-sm bg-[#EAF3EE] dark:bg-[#132D24] text-[#174A3B] dark:text-[#3D9E82] border border-[#BCD4C6] dark:border-[#245544] shrink-0 mt-0.5">
+                  <GraduationCap className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="font-serif text-lg font-normal text-stone-950 dark:text-stone-100 leading-snug">
+                  <div className="font-serif text-xl sm:text-2xl font-normal text-stone-950 dark:text-stone-100 leading-snug">
                     {about.degree}
                   </div>
-                  <p className="text-xs text-stone-500 dark:text-stone-400 mt-1">
+                  <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mt-1">
                     {about.institution}
                   </p>
                 </div>
@@ -93,7 +93,7 @@ export const About: React.FC = () => {
                   const itemConfig = principleIcons[idx] || principleIcons[0];
                   const Icon = itemConfig.icon;
                   return (
-                    <div key={idx} className="flex items-start gap-3">
+                    <div key={idx} className="flex items-start gap-3.5">
                       <div className={`p-2 rounded-sm border shrink-0 mt-0.5 ${itemConfig.color}`}>
                         <Icon className="w-3.5 h-3.5" />
                       </div>
@@ -101,7 +101,7 @@ export const About: React.FC = () => {
                         <h3 className="text-sm font-serif font-medium text-stone-950 dark:text-stone-100">
                           {principle.title}
                         </h3>
-                        <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
+                        <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
                           {principle.desc}
                         </p>
                       </div>
@@ -111,27 +111,6 @@ export const About: React.FC = () => {
               </div>
             </div>
 
-          </div>
-
-          {/* Column 3: Secondary Editorial Photo */}
-          <div className="lg:col-span-3 space-y-4">
-            <div className="relative aspect-[4/5] bg-stone-200 dark:bg-stone-900 border border-stone-300/80 dark:border-stone-700 overflow-hidden shadow-xs">
-              <img
-                src={portfolioData.personal.aboutImage}
-                alt="Charls Andrada Portrait"
-                className="w-full h-full object-cover object-top contrast-[1.02]"
-              />
-            </div>
-
-            <div className="p-4 bg-white dark:bg-[#181714] border border-stone-200 dark:border-stone-800 text-xs text-stone-600 dark:text-stone-400 space-y-1.5">
-              <div className="flex items-center gap-1.5 text-[#B94C29] dark:text-[#E0734F] font-medium text-[11px] tracking-wide uppercase">
-                <Award className="w-3.5 h-3.5" />
-                <span>Academic Distinction</span>
-              </div>
-              <p className="text-[12px] text-stone-600 dark:text-stone-400 leading-relaxed font-serif italic">
-                Graduated Magna Cum Laude with a BS in Entrepreneurship from Marikina Polytechnic College.
-              </p>
-            </div>
           </div>
 
         </div>
