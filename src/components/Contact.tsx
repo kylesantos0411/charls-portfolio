@@ -68,6 +68,9 @@ export const Contact: React.FC = () => {
   const [senderOrg, setSenderOrg] = useState<string>('');
   const [message, setMessage] = useState<string>('');
   const [formErrors, setFormErrors] = useState<{ name?: string; email?: string; message?: string }>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [statusMessage, setStatusMessage] = useState('');
 
   const activeInquiry = inquiryTypes.find((t) => t.id === selectedType) || inquiryTypes[0];
 
@@ -106,13 +109,60 @@ Best regards,
 ${senderName}`;
   };
 
-  const handleSubmitInquiry = (e: React.FormEvent) => {
+  const handleSubmitInquiry = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
 
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    // Web3Forms direct transmission
+    const accessKey = import.meta.env.VITE_WEB3FORMS_KEY || 'YOUR_ACCESS_KEY_HERE';
+
+    if (accessKey && accessKey !== 'YOUR_ACCESS_KEY_HERE') {
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            access_key: accessKey,
+            subject: `[${activeInquiry.label}] New Inquiry from ${senderName}`,
+            from_name: senderName,
+            email: senderEmail,
+            organization: senderOrg || 'Not specified',
+            inquiry_type: activeInquiry.label,
+            message: message,
+          }),
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          setSubmitStatus('success');
+          setStatusMessage('Your inquiry has been delivered directly to Charls. Thank you!');
+          setSenderName('');
+          setSenderEmail('');
+          setSenderOrg('');
+          setMessage('');
+          setIsSubmitting(false);
+          return;
+        } else {
+          throw new Error(data.message || 'Submission error');
+        }
+      } catch (err) {
+        console.warn('Direct submission error, falling back to mail client:', err);
+      }
+    }
+
+    // Seamless fallback to mailto transmission
+    setIsSubmitting(false);
     const subject = encodeURIComponent(`[${activeInquiry.label}] Inquiry from ${senderName}`);
     const body = encodeURIComponent(generateEmailDraft());
     window.location.href = `mailto:${contact.email}?subject=${subject}&body=${body}`;
+    setSubmitStatus('success');
+    setStatusMessage('Opening your email client to send the inquiry...');
   };
 
   const handleCopyDraft = () => {
@@ -285,14 +335,23 @@ ${senderName}`;
                 )}
               </div>
 
+              {/* Submission Status Alert */}
+              {submitStatus === 'success' && (
+                <div className="p-3.5 bg-[#EAF3EE] border border-[#BCD4C6] text-[#174A3B] text-xs flex items-center gap-2.5 animate-in fade-in duration-200">
+                  <Check className="w-4 h-4 text-[#174A3B] shrink-0" />
+                  <span>{statusMessage}</span>
+                </div>
+              )}
+
               {/* Submission Buttons */}
-              <div className="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#174A3B] text-white text-xs font-semibold tracking-widest uppercase hover:bg-[#12382D] transition-colors shadow-xs cursor-pointer"
+                  disabled={isSubmitting}
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#174A3B] text-white text-xs font-semibold tracking-widest uppercase hover:bg-[#12382D] transition-colors shadow-xs cursor-pointer disabled:opacity-60"
                 >
                   <Send className="w-3.5 h-3.5 text-[#BCD4C6]" />
-                  <span>Send via Email Client</span>
+                  <span>{isSubmitting ? 'Sending...' : 'Send Inquiry'}</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </button>
 
@@ -316,7 +375,7 @@ ${senderName}`;
               </div>
 
               <p className="text-[11px] text-stone-500 pt-1 leading-relaxed">
-                Direct transmission: opens your default email client or allows one-click draft copying directly to <span className="font-mono text-stone-800">{contact.email}</span>.
+                Direct transmission to <span className="font-mono text-stone-800 font-semibold">{contact.email}</span> with automated confirmation.
               </p>
             </form>
 
