@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#1C1917] text-[#FAF8F5] py-14">
+    <footer className="bg-[#1C1917] dark:bg-[#0B0A09] text-[#FAF8F5] py-14 border-t border-stone-800 transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         
         {/* Top Footer Bar */}

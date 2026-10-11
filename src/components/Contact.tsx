@@ -99,9 +99,11 @@ export const Contact: React.FC = () => {
 
 I am reaching out regarding a ${activeInquiry.label}.
 
-Name: ${senderName}
+Inquiry Category: ${activeInquiry.label}
+Contact Person: ${senderName}
 Email: ${senderEmail}
-${senderOrg ? `Organization: ${senderOrg}\n` : ''}
+Organization / Brand: ${senderOrg || 'Independent'}
+
 Inquiry Details:
 ${message}
 
@@ -146,6 +148,7 @@ ${senderName}`;
           setSenderEmail('');
           setSenderOrg('');
           setMessage('');
+          setFormErrors({});
           setIsSubmitting(false);
           return;
         } else {
@@ -189,25 +192,25 @@ ${senderName}`;
   return (
     <section
       id="contact"
-      className="py-24 sm:py-32 bg-[#F5F2EB] text-stone-900 border-b border-stone-200/80"
+      className="py-24 sm:py-32 bg-[#F5F2EB] dark:bg-[#141311] text-stone-900 dark:text-stone-100 border-b border-stone-200/80 dark:border-stone-800/80"
     >
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         
         {/* Section Marker */}
-        <div className="pb-8 border-b border-stone-300/60 flex items-center justify-between text-xs tracking-widest text-stone-500 uppercase font-medium">
-          <span className="inline-flex items-center gap-2 text-[#174A3B]">
+        <div className="pb-8 border-b border-stone-300/60 dark:border-stone-800/80 flex items-center justify-between text-xs tracking-widest text-stone-500 dark:text-stone-400 uppercase font-medium">
+          <span className="inline-flex items-center gap-2 text-[#174A3B] dark:text-[#3D9E82]">
             <Mail className="w-3.5 h-3.5" />
             <span>06 / Correspondence & Engagement</span>
           </span>
-          <span className="text-stone-400 font-mono text-[11px]">DIRECT INQUIRIES</span>
+          <span className="text-stone-400 dark:text-stone-500 font-mono text-[11px]">DIRECT INQUIRIES</span>
         </div>
 
         {/* Section Headline */}
         <div className="mt-14 max-w-2xl">
-          <h2 className="font-serif text-3xl sm:text-5xl font-normal text-stone-950 leading-tight">
+          <h2 className="font-serif text-3xl sm:text-5xl font-normal text-stone-950 dark:text-stone-50 leading-tight">
             {contact.headline}
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-stone-600 leading-relaxed font-normal">
+          <p className="mt-4 text-base sm:text-lg text-stone-600 dark:text-stone-400 leading-relaxed font-normal">
             {contact.subheadline}
           </p>
         </div>
@@ -216,13 +219,13 @@ ${senderName}`;
         <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
           {/* Column 1: Interactive Inquiry Form */}
-          <div className="lg:col-span-7 bg-white p-6 sm:p-9 border border-stone-200/90 shadow-2xs space-y-7">
+          <div className="lg:col-span-7 bg-white dark:bg-[#181714] p-6 sm:p-9 border border-stone-200/90 dark:border-stone-800 shadow-2xs space-y-7">
             
             <div className="space-y-1">
-              <span className="text-xs font-semibold tracking-widest uppercase text-stone-500 block">
+              <span className="text-xs font-semibold tracking-widest uppercase text-stone-500 dark:text-stone-400 block">
                 Step 1: Select Inquiry Purpose
               </span>
-              <p className="text-xs text-stone-500">
+              <p className="text-xs text-stone-500 dark:text-stone-400">
                 Choose the focus area that best matches your project.
               </p>
             </div>
@@ -241,14 +244,14 @@ ${senderName}`;
                     }}
                     className={`text-left p-3 border rounded-sm transition-all cursor-pointer ${
                       isSelected
-                        ? 'bg-[#EAF3EE] border-[#174A3B] text-[#174A3B] shadow-2xs'
-                        : 'bg-[#FAF8F5] border-stone-200 text-stone-700 hover:border-stone-400'
+                        ? 'bg-[#EAF3EE] dark:bg-[#132D24] border-[#174A3B] dark:border-[#2D7A64] text-[#174A3B] dark:text-[#3D9E82] shadow-2xs'
+                        : 'bg-[#FAF8F5] dark:bg-[#1F1E1B] border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-300 hover:border-stone-400 dark:hover:border-stone-600'
                     }`}
                   >
                     <div className="text-xs font-semibold tracking-wide">
                       {t.label}
                     </div>
-                    <div className="text-[11px] text-stone-500 mt-0.5 line-clamp-1">
+                    <div className="text-[11px] text-stone-500 dark:text-stone-400 mt-0.5 line-clamp-1">
                       {t.helper}
                     </div>
                   </button>
@@ -261,7 +264,7 @@ ${senderName}`;
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Name Field */}
                 <div className="space-y-1">
-                  <label htmlFor="name" className="text-xs font-semibold text-stone-700 uppercase tracking-wider block">
+                  <label htmlFor="name" className="text-xs font-semibold text-stone-700 dark:text-stone-300 uppercase tracking-wider block">
                     Your Name *
                   </label>
                   <input
@@ -270,18 +273,18 @@ ${senderName}`;
                     value={senderName}
                     onChange={(e) => setSenderName(e.target.value)}
                     placeholder="e.g. Maria Santos"
-                    className={`w-full px-3.5 py-2.5 bg-[#FAF8F5] border text-sm text-stone-900 focus:outline-hidden focus:border-[#174A3B] ${
-                      formErrors.name ? 'border-red-400' : 'border-stone-300'
+                    className={`w-full px-3.5 py-2.5 bg-[#FAF8F5] dark:bg-[#12110F] border text-sm text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-600 focus:outline-hidden focus:border-[#174A3B] dark:focus:border-[#3D9E82] ${
+                      formErrors.name ? 'border-red-400 dark:border-red-500' : 'border-stone-300 dark:border-stone-700'
                     }`}
                   />
                   {formErrors.name && (
-                    <span className="text-[11px] text-red-600 block">{formErrors.name}</span>
+                    <span className="text-[11px] text-red-600 dark:text-red-400 block">{formErrors.name}</span>
                   )}
                 </div>
 
                 {/* Email Field */}
                 <div className="space-y-1">
-                  <label htmlFor="email" className="text-xs font-semibold text-stone-700 uppercase tracking-wider block">
+                  <label htmlFor="email" className="text-xs font-semibold text-stone-700 dark:text-stone-300 uppercase tracking-wider block">
                     Your Email *
                   </label>
                   <input
@@ -290,20 +293,20 @@ ${senderName}`;
                     value={senderEmail}
                     onChange={(e) => setSenderEmail(e.target.value)}
                     placeholder="e.g. maria@company.com"
-                    className={`w-full px-3.5 py-2.5 bg-[#FAF8F5] border text-sm text-stone-900 focus:outline-hidden focus:border-[#174A3B] ${
-                      formErrors.email ? 'border-red-400' : 'border-stone-300'
+                    className={`w-full px-3.5 py-2.5 bg-[#FAF8F5] dark:bg-[#12110F] border text-sm text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-600 focus:outline-hidden focus:border-[#174A3B] dark:focus:border-[#3D9E82] ${
+                      formErrors.email ? 'border-red-400 dark:border-red-500' : 'border-stone-300 dark:border-stone-700'
                     }`}
                   />
                   {formErrors.email && (
-                    <span className="text-[11px] text-red-600 block">{formErrors.email}</span>
+                    <span className="text-[11px] text-red-600 dark:text-red-400 block">{formErrors.email}</span>
                   )}
                 </div>
               </div>
 
               {/* Organization (Optional) */}
               <div className="space-y-1">
-                <label htmlFor="org" className="text-xs font-semibold text-stone-700 uppercase tracking-wider block">
-                  Organization / Brand <span className="text-stone-400 font-normal">(Optional)</span>
+                <label htmlFor="org" className="text-xs font-semibold text-stone-700 dark:text-stone-300 uppercase tracking-wider block">
+                  Organization / Brand <span className="text-stone-400 dark:text-stone-500 font-normal">(Optional)</span>
                 </label>
                 <input
                   id="org"
@@ -311,13 +314,13 @@ ${senderName}`;
                   value={senderOrg}
                   onChange={(e) => setSenderOrg(e.target.value)}
                   placeholder="e.g. Santos Goods Co."
-                  className="w-full px-3.5 py-2.5 bg-[#FAF8F5] border border-stone-300 text-sm text-stone-900 focus:outline-hidden focus:border-[#174A3B]"
+                  className="w-full px-3.5 py-2.5 bg-[#FAF8F5] dark:bg-[#12110F] border border-stone-300 dark:border-stone-700 text-sm text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-600 focus:outline-hidden focus:border-[#174A3B] dark:focus:border-[#3D9E82]"
                 />
               </div>
 
               {/* Dynamic Context Message */}
               <div className="space-y-1">
-                <label htmlFor="message" className="text-xs font-semibold text-stone-700 uppercase tracking-wider block">
+                <label htmlFor="message" className="text-xs font-semibold text-stone-700 dark:text-stone-300 uppercase tracking-wider block">
                   Inquiry Details *
                 </label>
                 <textarea
@@ -326,19 +329,19 @@ ${senderName}`;
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder={activeInquiry.prompt}
-                  className={`w-full px-3.5 py-2.5 bg-[#FAF8F5] border text-sm text-stone-900 focus:outline-hidden focus:border-[#174A3B] resize-y ${
-                    formErrors.message ? 'border-red-400' : 'border-stone-300'
+                  className={`w-full px-3.5 py-2.5 bg-[#FAF8F5] dark:bg-[#12110F] border text-sm text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-600 focus:outline-hidden focus:border-[#174A3B] dark:focus:border-[#3D9E82] resize-y ${
+                    formErrors.message ? 'border-red-400 dark:border-red-500' : 'border-stone-300 dark:border-stone-700'
                   }`}
                 />
                 {formErrors.message && (
-                  <span className="text-[11px] text-red-600 block">{formErrors.message}</span>
+                  <span className="text-[11px] text-red-600 dark:text-red-400 block">{formErrors.message}</span>
                 )}
               </div>
 
               {/* Submission Status Alert */}
               {submitStatus === 'success' && (
-                <div className="p-3.5 bg-[#EAF3EE] border border-[#BCD4C6] text-[#174A3B] text-xs flex items-center gap-2.5 animate-in fade-in duration-200">
-                  <Check className="w-4 h-4 text-[#174A3B] shrink-0" />
+                <div className="p-3.5 bg-[#EAF3EE] dark:bg-[#132D24] border border-[#BCD4C6] dark:border-[#245544] text-[#174A3B] dark:text-[#3D9E82] text-xs flex items-center gap-2.5 animate-in fade-in duration-200">
+                  <Check className="w-4 h-4 text-[#174A3B] dark:text-[#3D9E82] shrink-0" />
                   <span>{statusMessage}</span>
                 </div>
               )}
@@ -348,7 +351,7 @@ ${senderName}`;
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#174A3B] text-white text-xs font-semibold tracking-widest uppercase hover:bg-[#12382D] transition-colors shadow-xs cursor-pointer disabled:opacity-60"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#174A3B] dark:bg-[#1D5344] text-white text-xs font-semibold tracking-widest uppercase hover:bg-[#12382D] dark:hover:bg-[#164236] transition-colors shadow-xs cursor-pointer disabled:opacity-60"
                 >
                   <Send className="w-3.5 h-3.5 text-[#BCD4C6]" />
                   <span>{isSubmitting ? 'Sending...' : 'Send Inquiry'}</span>
@@ -358,24 +361,24 @@ ${senderName}`;
                 <button
                   type="button"
                   onClick={handleCopyDraft}
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-white border border-stone-300 text-stone-800 text-xs font-semibold tracking-widest uppercase hover:border-[#174A3B] hover:text-[#174A3B] transition-colors cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-white dark:bg-[#1C1B18] border border-stone-300 dark:border-stone-700 text-stone-800 dark:text-stone-200 text-xs font-semibold tracking-widest uppercase hover:border-[#174A3B] dark:hover:border-[#3D9E82] hover:text-[#174A3B] dark:hover:text-[#3D9E82] transition-colors cursor-pointer"
                 >
                   {copiedDraft ? (
                     <>
-                      <Check className="w-3.5 h-3.5 text-[#174A3B]" />
-                      <span className="text-[#174A3B]">Draft Copied</span>
+                      <Check className="w-3.5 h-3.5 text-[#174A3B] dark:text-[#3D9E82]" />
+                      <span className="text-[#174A3B] dark:text-[#3D9E82]">Draft Copied</span>
                     </>
                   ) : (
                     <>
-                      <Copy className="w-3.5 h-3.5 text-stone-400" />
+                      <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500" />
                       <span>Copy Formatted Draft</span>
                     </>
                   )}
                 </button>
               </div>
 
-              <p className="text-[11px] text-stone-500 pt-1 leading-relaxed">
-                Direct transmission to <span className="font-mono text-stone-800 font-semibold">{contact.email}</span> with automated confirmation.
+              <p className="text-[11px] text-stone-500 dark:text-stone-400 pt-1 leading-relaxed">
+                Direct transmission to <span className="font-mono text-stone-800 dark:text-stone-200 font-semibold">{contact.email}</span> with automated confirmation.
               </p>
             </form>
 
@@ -385,16 +388,16 @@ ${senderName}`;
           <div className="lg:col-span-5 space-y-6">
             
             {/* Quick 1-Click Email Card */}
-            <div className="bg-white p-7 border border-stone-200/90 shadow-2xs space-y-4">
-              <span className="text-xs tracking-widest uppercase text-stone-500 block font-semibold">
+            <div className="bg-white dark:bg-[#181714] p-7 border border-stone-200/90 dark:border-stone-800 shadow-2xs space-y-4">
+              <span className="text-xs tracking-widest uppercase text-stone-500 dark:text-stone-400 block font-semibold">
                 Direct Inbox
               </span>
 
-              <div className="p-4 bg-[#FAF8F5] border border-stone-200/80 space-y-2">
-                <div className="text-xs text-stone-500 uppercase tracking-wider">
+              <div className="p-4 bg-[#FAF8F5] dark:bg-[#1F1E1B] border border-stone-200/80 dark:border-stone-700 space-y-2">
+                <div className="text-xs text-stone-500 dark:text-stone-400 uppercase tracking-wider">
                   Primary Address
                 </div>
-                <div className="font-mono text-sm text-stone-900 font-semibold break-all">
+                <div className="font-mono text-sm text-stone-900 dark:text-stone-100 font-semibold break-all">
                   {contact.email}
                 </div>
               </div>
@@ -402,7 +405,7 @@ ${senderName}`;
               <div className="flex flex-col sm:flex-row gap-2.5 pt-1">
                 <a
                   href={`mailto:${contact.email}`}
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#174A3B] text-white text-xs font-semibold tracking-wider uppercase hover:bg-[#12382D] transition-colors"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#174A3B] dark:bg-[#1D5344] text-white text-xs font-semibold tracking-wider uppercase hover:bg-[#12382D] dark:hover:bg-[#164236] transition-colors"
                 >
                   <Mail className="w-3.5 h-3.5 text-[#BCD4C6]" />
                   <span>Open Mail App</span>
@@ -410,16 +413,16 @@ ${senderName}`;
 
                 <button
                   onClick={handleCopyEmail}
-                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-white border border-stone-300 text-stone-800 text-xs font-semibold tracking-wider uppercase hover:border-[#174A3B] hover:text-[#174A3B] transition-colors cursor-pointer"
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-white dark:bg-[#1C1B18] border border-stone-300 dark:border-stone-700 text-stone-800 dark:text-stone-200 text-xs font-semibold tracking-wider uppercase hover:border-[#174A3B] dark:hover:border-[#3D9E82] hover:text-[#174A3B] dark:hover:text-[#3D9E82] transition-colors cursor-pointer"
                 >
                   {copiedEmail ? (
                     <>
-                      <Check className="w-3.5 h-3.5 text-[#174A3B]" />
-                      <span className="text-[#174A3B]">Copied</span>
+                      <Check className="w-3.5 h-3.5 text-[#174A3B] dark:text-[#3D9E82]" />
+                      <span className="text-[#174A3B] dark:text-[#3D9E82]">Copied</span>
                     </>
                   ) : (
                     <>
-                      <Copy className="w-3.5 h-3.5 text-stone-400" />
+                      <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500" />
                       <span>Copy Address</span>
                     </>
                   )}
@@ -428,35 +431,35 @@ ${senderName}`;
             </div>
 
             {/* Social Channels List with Icons */}
-            <div className="bg-white p-7 border border-stone-200/90 shadow-2xs space-y-4">
-              <span className="text-xs tracking-widest uppercase text-stone-500 block pb-3 border-b border-stone-100 font-semibold">
+            <div className="bg-white dark:bg-[#181714] p-7 border border-stone-200/90 dark:border-stone-800 shadow-2xs space-y-4">
+              <span className="text-xs tracking-widest uppercase text-stone-500 dark:text-stone-400 block pb-3 border-b border-stone-100 dark:border-stone-800 font-semibold">
                 Verified Social Channels
               </span>
 
-              <div className="divide-y divide-stone-100">
+              <div className="divide-y divide-stone-100 dark:divide-stone-800">
                 {contact.socials.map((social) => (
                   <a
                     key={social.name}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group py-3 flex items-center justify-between hover:text-[#174A3B] transition-colors"
+                    className="group py-3 flex items-center justify-between hover:text-[#174A3B] dark:hover:text-[#3D9E82] transition-colors"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-sm bg-[#FAF8F5] border border-stone-200 text-stone-600 group-hover:bg-[#EAF3EE] group-hover:text-[#174A3B] group-hover:border-[#BCD4C6] transition-colors">
+                      <div className="p-2 rounded-sm bg-[#FAF8F5] dark:bg-[#1F1E1B] border border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-400 group-hover:bg-[#EAF3EE] dark:group-hover:bg-[#132D24] group-hover:text-[#174A3B] dark:group-hover:text-[#3D9E82] group-hover:border-[#BCD4C6] dark:group-hover:border-[#245544] transition-colors">
                         {renderSocialIcon(social.platform)}
                       </div>
                       <div>
-                        <span className="block text-sm font-medium text-stone-900 group-hover:text-[#174A3B]">
+                        <span className="block text-sm font-medium text-stone-900 dark:text-stone-100 group-hover:text-[#174A3B] dark:group-hover:text-[#3D9E82]">
                           {social.name}
                         </span>
-                        <span className="block text-xs text-stone-500">
+                        <span className="block text-xs text-stone-500 dark:text-stone-400">
                           {social.handle}
                         </span>
                       </div>
                     </div>
 
-                    <ArrowUpRight className="w-4 h-4 text-stone-400 group-hover:text-[#174A3B] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="w-4 h-4 text-stone-400 dark:text-stone-500 group-hover:text-[#174A3B] dark:group-hover:text-[#3D9E82] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                 ))}
               </div>
@@ -470,4 +473,3 @@ ${senderName}`;
     </section>
   );
 };
-

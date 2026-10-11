@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
     --font-serif: 'Newsreader', Garamond, Georgia, serif;
     --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     
-    /* Earthy, non-AI prestige colors */
+    /* Earthy, non-AI prestige colors - Light */
     --spruce-dark: #12382D;
     --spruce: #174A3B;
     --spruce-light: #236551;
@@ -24,12 +26,37 @@
     --ink-muted: #57534E;
   }
 
+  .dark {
+    /* Prestigious warm obsidian & deep forest - Dark */
+    --spruce-dark: #0F2E24;
+    --spruce: #2D7A64;
+    --spruce-light: #3D9E82;
+    --spruce-tint: #132D24;
+    --spruce-border: #245544;
+    
+    --terracotta: #D96843;
+    --terracotta-dark: #B94C29;
+    --terracotta-tint: #301B14;
+    --terracotta-border: #5C2D1F;
+    
+    --paper-bg: #11100E;
+    --paper-subtle: #181714;
+    --paper-surface: #1E1D19;
+    --ink: #F7F5F0;
+    --ink-muted: #A8A29E;
+  }
+
+  html {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
   body {
     font-family: var(--font-sans);
     background-color: var(--paper-bg);
     color: var(--ink);
     overflow-x: hidden;
     letter-spacing: -0.01em;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   h1, h2, h3, .font-serif-editorial {
@@ -38,53 +65,101 @@
   }
 }
 
-/* Tasteful non-neon color utilities */
+/* Tasteful non-neon color utilities with dark mode support */
 .bg-spruce {
   background-color: #174A3B;
+}
+
+.dark .bg-spruce {
+  background-color: #1D5344;
 }
 
 .bg-spruce-dark {
   background-color: #12382D;
 }
 
+.dark .bg-spruce-dark {
+  background-color: #0E2920;
+}
+
 .text-spruce {
   color: #174A3B;
+}
+
+.dark .text-spruce {
+  color: #3D9E82;
 }
 
 .bg-spruce-tint {
   background-color: #EAF3EE;
 }
 
+.dark .bg-spruce-tint {
+  background-color: #132D24;
+}
+
 .border-spruce-subtle {
   border-color: #BCD4C6;
+}
+
+.dark .border-spruce-subtle {
+  border-color: #245544;
 }
 
 .bg-terracotta {
   background-color: #B94C29;
 }
 
+.dark .bg-terracotta {
+  background-color: #C75430;
+}
+
 .text-terracotta {
   color: #B94C29;
+}
+
+.dark .text-terracotta {
+  color: #E0734F;
 }
 
 .bg-terracotta-tint {
   background-color: #FDF2EB;
 }
 
+.dark .bg-terracotta-tint {
+  background-color: #2D1A14;
+}
+
 .border-terracotta-subtle {
   border-color: #F5D3C1;
+}
+
+.dark .border-terracotta-subtle {
+  border-color: #552719;
 }
 
 .paper-bg {
   background-color: #FAF8F5;
 }
 
+.dark .paper-bg {
+  background-color: #11100E;
+}
+
 .paper-surface {
   background-color: #FFFFFF;
 }
 
+.dark .paper-surface {
+  background-color: #1E1D19;
+}
+
 .paper-subtle {
   background-color: #F3EFE7;
+}
+
+.dark .paper-subtle {
+  background-color: #181714;
 }
 
 /* Refined typography styling */
@@ -92,4 +167,3 @@
   font-family: var(--font-serif);
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
-
